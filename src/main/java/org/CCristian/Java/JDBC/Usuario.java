@@ -49,7 +49,6 @@ public class Usuario {
     public Usuario() {
     }
 /*------------------MÉTODOS------------------*/
-
     @Override
     public String toString() {
         return id +" | "+ username +" | "+ password +" | "+ email;
