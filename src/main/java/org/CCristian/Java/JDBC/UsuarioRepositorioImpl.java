@@ -23,7 +23,7 @@ public class UsuarioRepositorioImpl implements Repositorio<Usuario>{
         opciones_Update.put("email", 4);
         Object[] opArreglo_Update = opciones_Update.keySet().toArray();
         Object opcion_Update;
-        usuario.setId(Long.valueOf(JOptionPane.showInputDialog("Ingrese el id del usuario que quiere actualizar")));
+        usuario.setId(Long.valueOf(JOptionPane.showInputDialog("Ingrese el 'id' del usuario que quiere actualizar")));
         opcion_Update = JOptionPane.showInputDialog(null, "Update", "Actualizar Usuarios", JOptionPane.INFORMATION_MESSAGE, null, opArreglo_Update, opArreglo_Update[0]);
         update = opciones_Update.get(opcion_Update.toString());
         switch (update) {
@@ -72,7 +72,8 @@ public class UsuarioRepositorioImpl implements Repositorio<Usuario>{
     @Override
     public void eliminar(Long id) {
         try (Connection connection = getConnection();
-             PreparedStatement preparedSt = connection.prepareStatement("DELETE FROM usuarios WHERE id=?")){
+             PreparedStatement preparedSt = connection.prepareStatement("DELETE FROM usuarios WHERE id=?"))
+        {
             preparedSt.setLong(1, id);
             preparedSt.executeUpdate();
         } catch (SQLException e) {
@@ -82,7 +83,19 @@ public class UsuarioRepositorioImpl implements Repositorio<Usuario>{
 
     @Override
     public void crear(Usuario usuario) {
-
+        usuario.setUsername(JOptionPane.showInputDialog("Ingrese el 'username'"));
+        usuario.setPassword(JOptionPane.showInputDialog("Ingrese el password"));
+        usuario.setEmail(JOptionPane.showInputDialog("Ingrese el 'email'"));
+        try (Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO usuarios(username, password, email) VALUES(?,?,?)"))
+        {
+            preparedStatement.setString(1, usuario.getUsername());
+            preparedStatement.setString(2, usuario.getPassword());
+            preparedStatement.setString(3, usuario.getEmail());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
