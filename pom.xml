@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.CCristian.Java.JDBC</groupId>
-    <artifactId>TAREA_MantenedorDeUsuarios_JDBC</artifactId>
+    <artifactId>TAREA_ProyectoMantenedorUsuariosJDBC</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
